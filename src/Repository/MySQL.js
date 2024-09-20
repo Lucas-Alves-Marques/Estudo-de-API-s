@@ -8,8 +8,7 @@ async function connectBD() {
         'host': "localhost",
         'user': 'root',
         'port': 3306,
-        'database':"cinetec"
-
+        'database':"cinetec2024"
     });
 
 };
