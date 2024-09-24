@@ -19,7 +19,7 @@ route.post("/", async (request,response) =>{
         return response.status(400).send({message : "A senha deve conter mais no minimo 6 caracteres"})
     }
 
-    if(typeUser != "admnistrador" && typeUser != "comum") {
+    if(typeUser != "administrador" && typeUser != "comum") {
 
         return response.status(400).send({message : "Tipo de usuario não conforme"})
     }
@@ -31,4 +31,4 @@ route.post("/", async (request,response) =>{
 
 })
 
-export default route
+export default route;
