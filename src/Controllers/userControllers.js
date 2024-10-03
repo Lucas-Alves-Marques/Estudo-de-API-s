@@ -19,7 +19,7 @@ route.post("/", async (request,response) =>{
         return response.status(400).send({message : "A senha deve conter mais no minimo 6 caracteres"})
     }
 
-    if(typeUser != "administrador" && typeUser != "comum") {
+    if(typeUser != "admnistrador" && typeUser != "comum") {
 
         return response.status(400).send({message : "Tipo de usuario não conforme"})
     }
@@ -30,5 +30,17 @@ route.post("/", async (request,response) =>{
 
 
 })
+
+
+route.put('/:idUser',async (request,response) =>{
+
+    const{name, email, password,typeUser} = request.body;
+    const{idUser} = request.params;
+
+    await services.updateUser(name,email,password,typeUser,idUser);
+    return response.status(201).send({"message": "Usuario atualizado com sucesso!"})
+
+
+});
 
 export default route;

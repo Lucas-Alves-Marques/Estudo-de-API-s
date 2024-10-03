@@ -8,8 +8,6 @@ routes.use("/user", userController);
 
 routes.use("/gender", genderControllers);
 
-routes.use("/director", di);
-
 export default routes;
 
 

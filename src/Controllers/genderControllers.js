@@ -10,7 +10,7 @@ route.post("/", async (request,response) =>{
 
     await services.insertGender(gender);
 
-    return response.status(201).send({"message": "Usuario cadastrado com sucesso!"})
+    return response.status(201).send({"message": "Genero cadastrado com sucesso!"})
 
 })
 
