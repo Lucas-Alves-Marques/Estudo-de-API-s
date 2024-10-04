@@ -4,11 +4,6 @@ import services from "../Services/userServices.js";
 
 const route = express.Router();
 
-// route.get("/", (request,response) =>{
-
-//     return response.status(200).send({"message" : "Listagem de usuarios com sucesso!!"});
-
-// });
 
 route.post("/", async (request,response) =>{
 
@@ -19,7 +14,13 @@ route.post("/", async (request,response) =>{
         return response.status(400).send({message : "A senha deve conter mais no minimo 6 caracteres"})
     }
 
-    if(typeUser != "admnistrador" && typeUser != "comum") {
+    if (email.includes("@") == false) {
+
+        return response.status(400).send({message : "E-mail não conforme"})
+
+    }
+
+    if(typeUser.toUpperCase() != "ADMINISTRACAO" && typeUser.toUpperCase() != "COMUM") {
 
         return response.status(400).send({message : "Tipo de usuario não conforme"})
     }
@@ -36,6 +37,22 @@ route.put('/:idUser',async (request,response) =>{
 
     const{name, email, password,typeUser} = request.body;
     const{idUser} = request.params;
+
+    if(password.length < 6){
+
+        return response.status(400).send({message : "A senha deve conter mais no minimo 6 caracteres"})
+    }
+
+    if (email.includes("@") == false) {
+
+        return response.status(400).send({message : "E-mail não conforme"})
+
+    }
+
+    if(typeUser != "admnistrador" && typeUser != "comum") {
+
+        return response.status(400).send({message : "Tipo de usuario não conforme"})
+    }
 
     await services.updateUser(name,email,password,typeUser,idUser);
     return response.status(201).send({"message": "Usuario atualizado com sucesso!"})

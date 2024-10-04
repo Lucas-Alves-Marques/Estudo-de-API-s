@@ -6,8 +6,6 @@ async function insertGender(gender){
 
     const infoGen = [gender];
 
-    console.log(gender)
-
     const connection = await dataBase.connectBD();
 
     await connection.query(sql, gender);
@@ -15,4 +13,17 @@ async function insertGender(gender){
     connection.end();
 }
 
-export default {insertGender};
+
+async function updatetGender(gender, id_genero){
+    const sql = "UPDATE tbl_genero SET genero = ? where id_genero = ?";
+
+    const infoGen = [gender, id_genero];
+
+    const connection = await dataBase.connectBD();
+
+    await connection.query(sql, infoGen);
+
+    connection.end();
+}
+
+export default {insertGender, updatetGender};
