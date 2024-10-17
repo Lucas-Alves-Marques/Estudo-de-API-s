@@ -20,7 +20,7 @@ route.post("/", async (request,response) =>{
 
     }
 
-    if(typeUser.toUpperCase() != "ADMINISTRACAO" && typeUser.toUpperCase() != "COMUM") {
+    if(typeUser.toLowerCase() != "admnistrador" && typeUser.toLowerCase() != "comum") {
 
         return response.status(400).send({message : "Tipo de usuario não conforme"})
     }
@@ -49,7 +49,7 @@ route.put('/:idUser',async (request,response) =>{
 
     }
 
-    if(typeUser != "admnistrador" && typeUser != "comum") {
+    if(typeUser.toLowerCase() != "admnistrador" && typeUser.toLowerCase() != "comum") {
 
         return response.status(400).send({message : "Tipo de usuario não conforme"})
     }

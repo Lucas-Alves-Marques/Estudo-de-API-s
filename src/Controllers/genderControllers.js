@@ -1,7 +1,6 @@
 import express, { request, response } from "express";
 import services from "../Services/genderServices.js";
 import { format } from "mysql2";
-import { is } from "express/lib/request.js";
 
 const route = express.Router();
 
@@ -9,19 +8,31 @@ route.post("/", async (request,response) =>{
 
     const {gender} = request.body;
 
+    const generos = ["Ação", "Comédia", "Drama", "Ficção Científica", "Terror", "Romance", "Animação", "Documentário", "Suspense",      
+                     "Fantasia", "Aventura", "Musical", "Faroeste", "Crime","ação", "comédia", "drama", "ficção científica", "terror",  
+                     "romance", "animação", "documentário", "suspense", "fantasia", "aventura", "musical", "faroeste", "crime","acao",  
+                     "comedia","ficcao cientifica", "animacao","documentario"];
+        
+        const valid = false;
+
+
+        for(let cont = 0 ; cont > generos.length; cont++){
+
         if (gender == generos[cont]){
 
-        
+                await services.insertGender(gender);
 
+                valid = true;
 
+                return response.status(201).send({"message": "Genero cadastrado com sucesso!"})
+            
+            }
+        };
 
+        if(valid = false){
+
+            return response.status(400).send({"message": "Genero não indentificado"})
         }
-
-        await services.insertGender(gender);
-
-        return response.status(201).send({"message": "Genero cadastrado com sucesso!"})
-
-
 
 })
 

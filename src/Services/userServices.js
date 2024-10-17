@@ -26,4 +26,15 @@ async function updateUser(name, email, password, typeUser, iduser){
     connection.end();
 };
 
-export default {createUser, updateUser};
+async function listUser(){
+
+const sql = "SELECT * FROM tbl_usuario";
+const conn = await dataBase.connectBD();
+const [rows] = await conn.query(sql);
+conn.end();
+return rows;
+
+
+}
+
+export default {createUser, updateUser, listUser};
