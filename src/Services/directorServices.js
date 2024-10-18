@@ -13,4 +13,16 @@ async function insertDirector(nome, nacionalidade, data_nasc, sexo){
     connection.end();
 }
 
-export default {insertDirector};
+async function updatetGender(nome_diretor, nacionalidade, dt_nascimento, sexo ){
+    const sql = "UPDATE tbl_diretor SET nome_diretor = ?, nacionalidade = ?, dt_nascimento = ?, sexo = ? where id_diretor = ?";
+
+    const infoDir = [nome_diretor, nacionalidade, dt_nascimento, sexo];
+
+    const connection = await dataBase.connectBD();
+
+    await connection.query(sql, infoDir);
+
+    connection.end();
+}
+
+export default {insertDirector, updatetGender};

@@ -8,31 +8,9 @@ route.post("/", async (request,response) =>{
 
     const {gender} = request.body;
 
-    const generos = ["Ação", "Comédia", "Drama", "Ficção Científica", "Terror", "Romance", "Animação", "Documentário", "Suspense",      
-                     "Fantasia", "Aventura", "Musical", "Faroeste", "Crime","ação", "comédia", "drama", "ficção científica", "terror",  
-                     "romance", "animação", "documentário", "suspense", "fantasia", "aventura", "musical", "faroeste", "crime","acao",  
-                     "comedia","ficcao cientifica", "animacao","documentario"];
-        
-        const valid = false;
+    await services.insertGender(gender);
 
-
-        for(let cont = 0 ; cont > generos.length; cont++){
-
-        if (gender == generos[cont]){
-
-                await services.insertGender(gender);
-
-                valid = true;
-
-                return response.status(201).send({"message": "Genero cadastrado com sucesso!"})
-            
-            }
-        };
-
-        if(valid = false){
-
-            return response.status(400).send({"message": "Genero não indentificado"})
-        }
+    return response.status(201).send({"message": "Genero adicionado com sucesso!"})
 
 })
 
@@ -47,6 +25,20 @@ route.put("/:IdGender", async (request,response) =>{
     return response.status(201).send({"message": "Genero atualizado com sucesso!"})
 
 })
+
+route.get("/", async (request,response) => {
+
+    const genders = await services.listGender();
+
+        if(genders.length < 1){
+
+            return response.status(204).end()
+
+        }
+
+        return response.status(200).send({"message": genders})
+
+});
 
 
 

@@ -28,7 +28,7 @@ async function updateUser(name, email, password, typeUser, iduser){
 
 async function listUser(){
 
-const sql = "SELECT * FROM tbl_usuario";
+const sql = "SELECT * FROM tbl_usuario WHERE deletado = 0";
 const conn = await dataBase.connectBD();
 const [rows] = await conn.query(sql);
 conn.end();
@@ -37,4 +37,16 @@ return rows;
 
 }
 
-export default {createUser, updateUser, listUser};
+async function deleteUser(id_user){
+
+    const sql = "UPDATE tbl_usuario SET deletado = 1 WHERE  id_usuario = ?";
+
+    const connection = await dataBase.connectBD();
+
+    await connection.query(sql, id_user);
+
+    connection.end();
+
+}
+
+export default {createUser, updateUser, listUser, deleteUser};

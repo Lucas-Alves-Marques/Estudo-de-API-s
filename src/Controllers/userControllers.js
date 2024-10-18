@@ -1,6 +1,7 @@
 
 import express, { request, response } from "express";
 import services from "../Services/userServices.js";
+import { Route } from "express";
 
 const route = express.Router();
 
@@ -32,7 +33,6 @@ route.post("/", async (request,response) =>{
 
 })
 
-
 route.put('/:idUser',async (request,response) =>{
 
     const{name, email, password,typeUser} = request.body;
@@ -56,6 +56,33 @@ route.put('/:idUser',async (request,response) =>{
 
     await services.updateUser(name,email,password,typeUser,idUser);
     return response.status(201).send({"message": "Usuario atualizado com sucesso!"})
+
+
+});
+
+route.get("/", async(request,response)=>{
+
+        const user = await services.listUser();
+
+        if(user.length < 1){
+
+            return response.status(204).end()
+
+        }
+
+        return response.status(200).send({"message": user})
+
+
+
+});
+
+route.delete('/:idUser', async(request,response)=>{
+
+    const {idUser} = request.params;
+
+    await services.deleteUser(idUser);
+
+    return response.status(200).send({'message': "Usuário excluido com sucesso"})
 
 
 });

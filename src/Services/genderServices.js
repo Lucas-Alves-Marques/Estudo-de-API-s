@@ -13,7 +13,6 @@ async function insertGender(gender){
     connection.end();
 }
 
-
 async function updatetGender(gender, id_genero){
     const sql = "UPDATE tbl_genero SET genero = ? where id_genero = ?";
 
@@ -26,4 +25,16 @@ async function updatetGender(gender, id_genero){
     connection.end();
 }
 
-export default {insertGender, updatetGender};
+async function listGender(){
+
+    const sql = "SELECT * FROM tbl_genero WHERE deletado = 0";
+    const conn = await dataBase.connectBD();
+    const [rows] = await conn.query(sql);
+    conn.end();
+    return rows;
+    
+    
+    }
+    
+
+export default {insertGender, updatetGender, listGender};
