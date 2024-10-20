@@ -20,7 +20,7 @@ route.put("/:IdGender", async (request,response) =>{
 
     const {IdGender} = request.params;
 
-    await services.updatetGender(gender,IdGender);
+    await services.updateGender(gender,IdGender);
 
     return response.status(201).send({"message": "Genero atualizado com sucesso!"})
 
@@ -39,6 +39,18 @@ route.get("/", async (request,response) => {
         return response.status(200).send({"message": genders})
 
 });
+
+route.delete("/:IdGender", async (request,response)=>{
+
+    const {IdGender} = request.params;
+
+    await services.deleteGender(IdGender);
+
+    return response.status(200).send({'message': "Genero excluido com sucesso"})
+
+
+
+})
 
 
 

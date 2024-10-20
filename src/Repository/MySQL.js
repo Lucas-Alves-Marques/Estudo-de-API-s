@@ -4,7 +4,7 @@ async function connectBD() {
 
     return await mysql.createConnection({
 
-        'password': "",
+        'password': "Lu24Ca$dev",
         'host': "localhost",
         'user': 'root',
         'port': 3306,

@@ -13,7 +13,7 @@ async function insertGender(gender){
     connection.end();
 }
 
-async function updatetGender(gender, id_genero){
+async function updateGender(gender, id_genero){
     const sql = "UPDATE tbl_genero SET genero = ? where id_genero = ?";
 
     const infoGen = [gender, id_genero];
@@ -34,7 +34,18 @@ async function listGender(){
     return rows;
     
     
-    }
+}
+
+async function deleteGender(id_gender) {
+
+    const sql = "UPDATE tbl_genero SET deletado = 1 WHERE  id_genero = ?";
+
+    const conn = await dataBase.connectBD();
+
+    await conn.query(sql,id_gender)
+
+    conn.end();
+}
     
 
-export default {insertGender, updatetGender, listGender};
+export default {insertGender, updateGender, listGender, deleteGender};
