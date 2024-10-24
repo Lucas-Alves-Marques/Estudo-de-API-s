@@ -29,11 +29,11 @@ route.post("/", async (request,response) =>{
 
 })
 
-route.put("/:idDirector", async (request,response)=>{
+route.put("/:idDiretor", async (request,response)=>{
 
     const {name, nationality, date_birth,sex} = request.body;
 
-    const {idDirector} = request.params;
+    const {idDiretor} = request.params;
 
     const sex_dir = sex.toUpperCase();
 
@@ -43,7 +43,7 @@ route.put("/:idDirector", async (request,response)=>{
         return response.status(400).send({"message": "Sexo invalido, informe 'M' para masculino e 'F' para Feminino"})
     }
 
-    await services.updateDirector(name, nationality, date_birth,sex,idDirector)
+    await services.updateDirector(name, nationality, date_birth,sex,idDiretor)
 
     return response.status(201).send({"message": "Diretor atualizado com sucesso!"})
 
@@ -66,7 +66,7 @@ route.get("/", async (request,response)=>{
 
 route.delete("/:id_director", async (request,response)=>{
 
-    const  id_director = request.params;
+    const  {id_director} = request.params;
 
     await services.deleteDirector(id_director);
 

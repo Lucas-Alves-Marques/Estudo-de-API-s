@@ -13,11 +13,11 @@ async function insertDirector(name, nationality, date_birth,sex){
     connection.end();
 }
 
-async function updateDirector(name, nationality, date_birth,sex, id_director ){
+async function updateDirector(name, nationality, date_birth,sex, id_diretor ){
 
     const sql = "UPDATE tbl_diretor SET nome_diretor = ?, nacionalidade = ?, dt_nascimento = ?, sexo = ? where id_diretor = ?";
 
-    const infoDir = [name, nationality, date_birth,sex, id_director];
+    const infoDir = [name, nationality, date_birth,sex, id_diretor];
 
     const connection = await dataBase.connectBD();
 
