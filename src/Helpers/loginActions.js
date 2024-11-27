@@ -12,6 +12,9 @@ function generatePassword(){
 
 function generateToken(id_login, user_name){
 
+    const secret = env.SECRET;
+
+
     return jwt.sign({infoUser: {id_login, userName : user_name}}, secret, {expiresIn: 60 * 60 * 5});
 }
 

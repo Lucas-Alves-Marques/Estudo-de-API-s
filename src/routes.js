@@ -4,10 +4,11 @@ import genderControllers from "./Controllers/genderControllers.js";
 import directorControllers from "./Controllers/directorControllers.js";
 import atorControllers from "./Controllers/actorControllers.js";
 import loginControllers from "./Controllers/loginControllers.js";
+import { verifyJWT } from "../middlewares/JWT.js";
 
 const routes = express();
 
-routes.use("/user", userController);
+routes.use("/user", verifyJWT ,userController);
 
 routes.use("/gender", genderControllers);
 

@@ -64,6 +64,8 @@ route.get("/", async(request,response)=>{
 
         const user = await services.listUser();
 
+        console.log("teste")
+
         if(user.length < 1){
 
             return response.status(204).end()

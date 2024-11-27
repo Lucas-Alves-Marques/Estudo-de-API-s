@@ -2,9 +2,9 @@ import jwt, { decode } from 'jsonwebtoken';
 
 function verifyJWT(req, res, next){
 
-    const secret = 'aSenh@queVoceQuiser!';
+    const secret = env.SECRET;
 
-    const authHeader  = req.header.authorization;
+    const authHeader  = req.headers.authorization;
 
     if(!authHeader) {
 
@@ -25,16 +25,18 @@ function verifyJWT(req, res, next){
         return res.status(401).send({message: "Token Invalido"});
     }
 
-    jwt.verify(token,secret,(err, decoded) =>{
+    jwt.verify(token,secret, (err, decoded) =>{
 
         if(err){
 
             return res.status(401).send({message: "Usuario não autenticado."})
         }
 
+
+
         req.infoUser = decoded.infoUser;
 
-        return next;
+        return next();
     });
 
 };

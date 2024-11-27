@@ -2,25 +2,23 @@ import express from "express";
 import services from "../Services/loginServices.js";
 import loginActios from '../Helpers/loginActions.js';
 
-
 const Router = express.Router();
 
 Router.post('/', async (req, res) => {
 
     const {email, password} = req.body;
 
-
-
     try{
 
          const user = await services.login(email,password)
 
-         console.log(user.length)
+        const {id_usuario, nome} = user[0]
 
-        
         if(user.length > 0){
 
-            res.status(200).send({message: 'Login efetuado com sucesso'});
+            const token = loginActios.generateToken(id_usuario,nome)
+
+           return res.status(200).send({message: token});
         }
 
         else{
