@@ -1,6 +1,7 @@
 import express from "express";
-import { generatePassword } from "../Helpers/loginActions";
-import Services from "../Services/loginServices";
+import services from "../Services/loginServices.js";
+import loginActios from '../Helpers/loginActions.js';
+
 
 const Router = express.Router();
 
@@ -9,9 +10,13 @@ Router.post('/', async (req, res) => {
     const {email, password} = req.body;
 
 
+
     try{
 
-        const user = await db.login(email,password);
+         const user = await services.login(email,password)
+
+         console.log(user.length)
+
         
         if(user.length > 0){
 
@@ -21,7 +26,7 @@ Router.post('/', async (req, res) => {
         else{
             res.status(401).send({message:'Login incorreto'});
         }
-    }
+    }   
 
     catch(err){
 
@@ -37,13 +42,13 @@ Router.post('/reset', async (req,res) => {
 
     try{
         
-        const user = await Services.checkEmail(email);
+        const user = await services.checkEmail(email);
 
         if(user.length > 0 ){
 
-            const newPassword = generatePassword();
+            const newPassword = loginActios();
 
-            await Services.changePassword(email , newPassword);
+            await services.changePassword(email , newPassword);
 
             res.status(200).send({message: `Nova senha: ${newPassword}`});
         }

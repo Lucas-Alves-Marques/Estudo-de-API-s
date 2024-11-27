@@ -3,7 +3,7 @@ import userController from "./Controllers/userControllers.js";
 import genderControllers from "./Controllers/genderControllers.js";
 import directorControllers from "./Controllers/directorControllers.js";
 import atorControllers from "./Controllers/actorControllers.js";
-import loginControllers from  "./Controllers/loginControllers.js";
+import loginControllers from "./Controllers/loginControllers.js";
 
 const routes = express();
 

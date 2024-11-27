@@ -28,11 +28,15 @@ async function updateUser(name, email, password, typeUser, iduser){
 
 async function listUser(){
 
-const sql = "SELECT * FROM tbl_usuario WHERE deletado = 0";
-const conn = await dataBase.connectBD();
-const [rows] = await conn.query(sql);
-conn.end();
-return rows;
+    const sql = "SELECT * FROM tbl_usuario WHERE deletado = 0";
+
+    const conn = await dataBase.connectBD();
+
+    const [rows] = await conn.query(sql);
+
+    conn.end();
+    
+    return rows;
 
 
 }
